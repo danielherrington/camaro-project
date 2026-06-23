@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Catfish '99 - The Camaro Chronicles</title>
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="A comprehensive restoration and modification project log of a 1999 4th Generation V6 Automatic Convertible Chevrolet Camaro. From family hand-me-down to Miami cruiser.">
+  <meta name="keywords" content="1999 Camaro, 4th Gen Camaro, Catfish Camaro, V6 Camaro, convertible restoration, project car log, 3800 Series II V6, 4L60E automatic, Miami car project">
+  <meta name="author" content="Owner & Enthusiast">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Project Catfish '99 - The Camaro Chronicles">
+  <meta property="og:description" content="Documenting the journey of turning an unloved 1999 Camaro V6 Convertible into a polished Miami cruiser.">
+  <meta property="og:type" content="website">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="theme-teal">
+  <!-- CRT Monitor Scanline & Glow Overlay -->
+  <div class="crt-overlay" id="crtOverlay"></div>
+  
+  <div class="app-container">
+    
+    <!-- Top Retro Banner & Navigation -->
+    <header class="retro-header">
+      <div class="header-inner">
+        <div class="brand">
+          <div class="logo-wrapper">
+            <span class="logo-txt-sub">F-BODY RESTO-MOD LOG</span>
+            <h1 class="logo-txt">CATFISH '99</h1>
+          </div>
+        </div>
+        
+        <!-- CRT Screen Toggle -->
+        <div class="controls-panel">
+          <button id="crtToggleBtn" class="control-btn active" title="Toggle CRT Scanline Effect">
+            <span class="btn-indicator"></span> CRT: ON
+          </button>
+        </div>
+      </div>
+      
+      <!-- Project Overview Dashboard Console -->
+      <div class="dashboard-cluster">
+        <div class="dashboard-grid">
+          <!-- Card 1: Specs -->
+          <div class="dash-card specs-card">
+            <div class="dash-card-header">
+              <span class="icon">📋</span> VEHICLE OVERVIEW
+            </div>
+            <div class="dash-card-body">
+              <div class="spec-row">
+                <span class="lbl">MAKE/MODEL:</span>
+                <span class="val">1999 Chevrolet Camaro Convertible</span>
+              </div>
+              <div class="spec-row">
+                <span class="lbl">ENGINE:</span>
+                <span class="val">3.8L 3800 Series II V6</span>
+              </div>
+              <div class="spec-row">
+                <span class="lbl">TRANSMISSION:</span>
+                <span class="val">4-Speed Automatic (4L60E)</span>
+              </div>
+              <div class="spec-row">
+                <span class="lbl">VIN REGISTRY:</span>
+                <span class="val cyan-text">#001999</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: Metrics -->
+          <div class="dash-card metrics-card">
+            <div class="dash-card-header">
+              <span class="icon">📊</span> PROJECT DIAGNOSTICS
+            </div>
+            <div class="dash-card-body">
+              <div class="metric-row">
+                <span class="lbl">COMPLETED JOBS:</span>
+                <span class="val" id="completedJobsVal">0 / 0</span>
+              </div>
+              <div class="metric-row">
+                <span class="lbl">PROJECT PROGRESS:</span>
+                <div class="progress-bar-wrapper">
+                  <div class="progress-bar-fill" id="projectProgressFill" style="width: 0%;"></div>
+                  <span class="progress-bar-percent" id="projectProgressPercent">0%</span>
+                </div>
+              </div>
+              <div class="metric-row">
+                <span class="lbl">DRIVEABILITY STATUS:</span>
+                <span class="val green-text pulsing-status" id="driveabilityStatus">ROAD READY</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3: Status & Priority -->
+          <div class="dash-card status-card">
+            <div class="dash-card-header">
+              <span class="icon">🔧</span> GARAGE MONITOR
+            </div>
+            <div class="dash-card-body">
+              <div class="spec-row">
+                <span class="lbl">LAST UPDATE:</span>
+                <span class="val yellow-text" id="lastUpdateVal">Loading...</span>
+              </div>
+              <div class="spec-row">
+                <span class="lbl">NEXT PRIORITY:</span>
+                <span class="val orange-text">Lower Intake Gasket</span>
+              </div>
+              <div class="spec-row">
+                <span class="lbl">WORK LOCATION:</span>
+                <span class="val">Miami, FL (Driveway & Shop)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Factory Paint Color Selector (Theme Switcher) -->
+        <div class="theme-selector-bar">
+          <span class="selector-label">SELECT EXTERIOR FINISH (THEME):</span>
+          <div class="theme-buttons">
+            <button class="theme-select-btn teal active" data-theme="teal" data-name="MYSTIC TEAL">
+              <span class="color-swatch" style="background-color: #007788;"></span> Mystic Teal
+            </button>
+            <button class="theme-select-btn orange" data-theme="orange" data-name="HUGGER ORANGE">
+              <span class="color-swatch" style="background-color: #e65c00;"></span> Hugger Orange
+            </button>
+            <button class="theme-select-btn red" data-theme="red" data-name="BRIGHT RED">
+              <span class="color-swatch" style="background-color: #cc0000;"></span> Bright Red
+            </button>
+            <button class="theme-select-btn pewter" data-theme="pewter" data-name="LIGHT PEWTER">
+              <span class="color-swatch" style="background-color: #8c9fa8;"></span> Light Pewter
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      
+      <!-- Hero Narrative Section -->
+      <section class="hero-narrative card">
+        <div class="card-glow"></div>
+        <div class="card-inner">
+          <div class="narrative-grid">
+            <div class="narrative-text">
+              <div class="badge">PROJECT ORIGIN</div>
+              <h2>An Ode to the Unloved Catfish</h2>
+              <p class="lead-text">
+                Some cars are born icons. Others earn their status through sheer, stubborn character. 
+                My dad bought this 1999 Camaro brand new when I was a kid of 12 or 13, and in my eyes, it was the coolest car on earth. 
+                Years later, the automotive world would decree that the fourth-generation facelift Camaro was the ugliest—a "catfish." 
+                The purists scoffed: it was a V6, not the LS1 V8. It was an automatic, not a manual. It was a convertible. 
+                Everything said I shouldn't love this car.
+              </p>
+              <p>
+                When my dad decided to get rid of it years later, I couldn't justify the parking space or the endless list of maintenance it needed. 
+                With a heavy heart, I told him no. I thought that was the end of the story. But my wife had other plans. 
+                For my birthday that year, she surprised me with it parked in our driveway, wrapped in a massive red bow. 
+                Now based in Miami, I spend my weekends getting my hands dirty, proving that the V6 Catfish isn't just a toy—it's a rolling vault of memories.
+              </p>
+            </div>
+            
+            <div class="hero-image-display">
+              <div class="hero-img-wrapper">
+                <img src="assets/car_polished.jpg" alt="Polished 1999 Camaro Convertible in Miami" class="hero-real-img">
+                <div class="image-overlay-glow"></div>
+              </div>
+              <div class="neon-tagline">
+                <span class="pulse-text">MIAMI, FL</span>
+                <span class="divider">|</span>
+                <span class="static-tag">EST. 1999</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Spec Comparison Table Widget -->
+      <section class="specs-section card">
+        <div class="card-inner">
+          <div class="section-header">
+            <h3>Catfish Camaro: Two Perspectives</h3>
+            <div class="perspective-toggle-wrapper">
+              <span class="toggle-label text-gray">PERSPECTIVE:</span>
+              <div class="toggle-switch-container">
+                <button id="hatePerspectiveBtn" class="toggle-btn">THE HATERS</button>
+                <div class="toggle-slider-bg">
+                  <div class="toggle-slider-knob" id="toggleSliderKnob"></div>
+                </div>
+                <button id="lovePerspectiveBtn" class="toggle-btn active">THE OWNER</button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="specs-table-container">
+            <table class="specs-table" id="specsTable">
+              <thead>
+                <tr>
+                  <th style="width: 25%">COMPONENT</th>
+                  <th style="width: 35%" id="col1Header">SPECIFICATION</th>
+                  <th style="width: 40%" id="col2Header">THE VERDICT</th>
+                </tr>
+              </thead>
+              <tbody id="specsTableBody">
+                <!-- Populated dynamically via app.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Interactive Maintenance Checklist Section -->
+      <section class="checklist-section card">
+        <div class="card-inner">
+          <div class="section-header">
+            <h3><span class="icon">📋</span> Maintenance & Mod Checklist</h3>
+            <div class="checklist-controls">
+              <input type="text" id="checklistSearch" placeholder="Search tasks..." class="checklist-search">
+              <div class="checklist-filters">
+                <button class="chk-filter-btn active" data-filter="all">ALL</button>
+                <button class="chk-filter-btn" data-filter="done">COMPLETED</button>
+                <button class="chk-filter-btn" data-filter="future">FUTURE</button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="checklist-stats-bar">
+            <div class="chk-stat">
+              <span class="chk-stat-label font-mono">TOTAL JOBS:</span>
+              <span class="chk-stat-val font-mono" id="chkTotalCount">0</span>
+            </div>
+            <div class="chk-stat">
+              <span class="chk-stat-label font-mono">COMPLETED:</span>
+              <span class="chk-stat-val font-mono green-text" id="chkDoneCount">0</span>
+            </div>
+            <div class="chk-stat">
+              <span class="chk-stat-label font-mono">FUTURE:</span>
+              <span class="chk-stat-val font-mono orange-text" id="chkFutureCount">0</span>
+            </div>
+          </div>
+
+          <div class="checklist-table-container">
+            <table class="checklist-table">
+              <thead>
+                <tr>
+                  <th style="width: 50%">TASK / REPAIR</th>
+                  <th style="width: 25%">DATE COMPLETED</th>
+                  <th style="width: 25%">STATUS</th>
+                </tr>
+              </thead>
+              <tbody id="checklistTableBody">
+                <!-- Populated dynamically via app.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Main Logs Feed -->
+      <section class="logs-section">
+        <div class="logs-header-container">
+          <h3 class="section-title"><span class="icon">📁</span> WORK LOGS & CHRONICLES</h3>
+          
+          <!-- Category Filter Bar -->
+          <div class="filter-bar">
+            <button class="filter-tab active" data-category="all">ALL ENTRIES</button>
+            <button class="filter-tab" data-category="general">THE STORY</button>
+            <button class="filter-tab" data-category="electrical">ELECTRICAL & AUDIO</button>
+            <button class="filter-tab" data-category="convertible">CONVERTIBLE TOP</button>
+            <button class="filter-tab" data-category="cruising">MIAMI CRUISING</button>
+            <button class="filter-tab" data-category="cosmetics">COSMETICS</button>
+          </div>
+        </div>
+
+        <!-- Logs Timeline Grid -->
+        <div class="logs-grid" id="logsGrid">
+          <!-- Populated by app.js -->
+        </div>
+      </section>
+
+      <!-- Guestbook Section -->
+      <section class="guestbook-section card">
+        <div class="card-inner">
+          <div class="guestbook-header">
+            <h3>📖 Sign My Retro Guestbook</h3>
+            <p class="subtitle text-gray">Leave your comments, catfish stories, or F-body respect. Direct from Miami.</p>
+          </div>
+
+          <div class="guestbook-layout">
+            <!-- Sign Form -->
+            <form id="guestbookForm" class="guestbook-form">
+              <div class="form-group">
+                <label for="gbName">HANDLE / USERNAME</label>
+                <input type="text" id="gbName" required placeholder="e.g., LS1_Slayer99" maxlength="25">
+              </div>
+              <div class="form-group">
+                <label for="gbMessage">MESSAGE</label>
+                <textarea id="gbMessage" required placeholder="Keep the catfish alive! Cruising Collins Ave..." maxlength="200" rows="3"></textarea>
+              </div>
+              <div class="form-group">
+                <label>CHOOSE AVATAR CON</label>
+                <div class="avatar-select">
+                  <label class="avatar-option">
+                    <input type="radio" name="gbAvatar" value="🚗" checked>
+                    <span class="avatar-icon">🚗</span>
+                  </label>
+                  <label class="avatar-option">
+                    <input type="radio" name="gbAvatar" value="🔧">
+                    <span class="avatar-icon">🔧</span>
+                  </label>
+                  <label class="avatar-option">
+                    <input type="radio" name="gbAvatar" value="🌴">
+                    <span class="avatar-icon">🌴</span>
+                  </label>
+                  <label class="avatar-option">
+                    <input type="radio" name="gbAvatar" value="🎀">
+                    <span class="avatar-icon">🎀</span>
+                  </label>
+                  <label class="avatar-option">
+                    <input type="radio" name="gbAvatar" value="🐟">
+                    <span class="avatar-icon">🐟</span>
+                  </label>
+                </div>
+              </div>
+              <button type="submit" class="submit-btn">POST ENTRY</button>
+            </form>
+
+            <!-- Signatures list -->
+            <div class="signatures-list-container">
+              <label>RECENT SIGNATURES</label>
+              <div class="signatures-list" id="signaturesList">
+                <!-- Populated dynamically -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+    </main>
+
+    <!-- Project Log Detail Overlay Modal -->
+    <div class="modal" id="logModal" role="dialog" aria-modal="true" aria-hidden="true">
+      <div class="modal-backdrop" id="modalBackdrop"></div>
+      <div class="modal-content card">
+        <button class="modal-close-btn" id="modalCloseBtn" aria-label="Close dialog">&times;</button>
+        <div class="modal-header">
+          <div class="modal-meta">
+            <span class="modal-date" id="modalDate">October 12, 2024</span>
+            <span class="modal-category-badge" id="modalCategory">Category</span>
+          </div>
+          <h2 id="modalTitle">Title of the Work Log</h2>
+        </div>
+        
+        <div class="modal-body-scroll">
+          <!-- Tech specs panel -->
+          <div class="modal-tech-specs">
+            <div class="spec-tile">
+              <span class="tile-label">DIFFICULTY</span>
+              <span class="tile-value" id="modalDifficulty">🔧🔧🔧</span>
+            </div>
+            <div class="spec-tile">
+              <span class="tile-label">TIME SPENT</span>
+              <span class="tile-value" id="modalTime">4 Hours</span>
+            </div>
+            <div class="spec-tile">
+              <span class="tile-label">COST</span>
+              <span class="tile-value" id="modalCost">$45</span>
+            </div>
+          </div>
+          
+          <div class="modal-image-container" id="modalImageContainer">
+            <!-- Dynamically populated or SVG illustration fallback -->
+          </div>
+          
+          <div class="modal-text-content" id="modalContent">
+            <!-- Full HTML content populated dynamically -->
+          </div>
+          
+          <div class="modal-tags" id="modalTags">
+            <!-- Tags list -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Retro Footer -->
+    <footer class="retro-footer">
+      <div class="footer-grid">
+        <!-- Webring widget -->
+        <div class="webring-panel">
+          <div class="webring-title">🐟 CATFISH F-BODY WEBRING 🐟</div>
+          <div class="webring-nav">
+            <a href="#" class="webring-link" onclick="alert('Navigating to previous Catfish website (Simulation)...'); return false;">&lt;&lt; PREV</a>
+            <span class="webring-current">SITE #1999</span>
+            <a href="#" class="webring-link" onclick="alert('Navigating to next F-Body forum (Simulation)...'); return false;">NEXT &gt;&gt;</a>
+          </div>
+        </div>
+
+        <!-- Custom Hit Counter -->
+        <div class="hit-counter-panel">
+          <span class="counter-label">YOU ARE VISITOR NUMBER:</span>
+          <div class="counter-display" id="hitCounterDisplay">
+            <span class="counter-digit">0</span>
+            <span class="counter-digit">0</span>
+            <span class="counter-digit">1</span>
+            <span class="counter-digit">9</span>
+            <span class="counter-digit">9</span>
+            <span class="counter-digit">9</span>
+          </div>
+        </div>
+
+        <!-- Under Construction Widget -->
+        <div class="construction-panel">
+          <div class="construction-icon">⚠️</div>
+          <div class="construction-text">
+            <span>PROJECT CONSTANTLY UNDER CONSTRUCTION</span>
+            <span class="blinking-cursor">_</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="copyright">
+        <p>&copy; 2026. Made with ❤️ in Miami, FL. All Camaro rights and catfish jokes reserved.</p>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Load files sequentially -->
+  <script src="logs.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
