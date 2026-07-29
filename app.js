@@ -339,6 +339,187 @@ document.addEventListener("DOMContentLoaded", () => {
   // ==========================================================================
   // 6. Project Dashboard Metrics Calculation
   // ==========================================================================
+  // ==========================================================================
+  // 6. Project Dashboard Metrics & Odometer Scheduler Calculations
+  // ==========================================================================
+  
+  // Get current odometer
+  function getOdometer() {
+    const odo = localStorage.getItem("camaro_odometer");
+    return odo ? parseInt(odo, 10) : 102000;
+  }
+
+  // Set current odometer
+  function setOdometer(value) {
+    localStorage.setItem("camaro_odometer", value);
+  }
+
+  // Helper to sanitize IDs for localStorage keys
+  function getTaskStorageId(taskName) {
+    return "camaro_last_mileage_" + taskName.toLowerCase().replace(/[^a-z0-9]/g, "_");
+  }
+
+  // Get user-set last mileage for a task
+  function getTaskLastMileage(task) {
+    const localVal = localStorage.getItem(getTaskStorageId(task.item));
+    if (localVal !== null) {
+      return parseInt(localVal, 10);
+    }
+    return task.lastMileage; // Can be null
+  }
+
+  // Set user-set last mileage for a task
+  function setTaskLastMileage(taskName, mileage) {
+    localStorage.setItem("camaro_last_mileage_" + taskName.toLowerCase().replace(/[^a-z0-9]/g, "_"), mileage);
+  }
+
+  // Calculate status details for a checklist item
+  function calculateTaskStatus(item) {
+    if (item.done === "Future") {
+      return {
+        status: "planned",
+        badgeText: "🛠️ Planned",
+        detailText: "Scheduled for future build phase",
+        remainingText: "Planned"
+      };
+    }
+    
+    if (item.type !== "recurring") {
+      return {
+        status: "completed",
+        badgeText: "✅ Completed",
+        detailText: "One-time service / modification completed",
+        remainingText: "Done"
+      };
+    }
+
+    const currentOdo = getOdometer();
+    const lastMil = getTaskLastMileage(item);
+    
+    let isMileageOverdue = false;
+    let isMileageDueSoon = false;
+    let milesRemaining = null;
+
+    if (item.mileageInterval && lastMil !== null) {
+      const nextDueMil = lastMil + item.mileageInterval;
+      milesRemaining = nextDueMil - currentOdo;
+      if (milesRemaining <= 0) {
+        isMileageOverdue = true;
+      } else if (milesRemaining <= 500) {
+        isMileageDueSoon = true;
+      }
+    }
+
+    let isTimeOverdue = false;
+    let isTimeDueSoon = false;
+    let daysRemaining = null;
+    let dueDateStr = "";
+
+    if (item.monthsInterval && item.date && item.date !== "Future") {
+      const lastDate = new Date(item.date);
+      if (!isNaN(lastDate.getTime())) {
+        const dueDate = new Date(lastDate);
+        dueDate.setMonth(dueDate.getMonth() + item.monthsInterval);
+        dueDateStr = dueDate.toLocaleDateString(undefined, { month: 'numeric', day: 'numeric', year: '2-digit' });
+        
+        // Current date is July 28, 2026
+        const currentDate = new Date('2026-07-28');
+        const msDiff = dueDate - currentDate;
+        daysRemaining = Math.ceil(msDiff / (1000 * 60 * 60 * 24));
+        
+        if (daysRemaining <= 0) {
+          isTimeOverdue = true;
+        } else if (daysRemaining <= 30) {
+          isTimeDueSoon = true;
+        }
+      }
+    }
+
+    // Combine mileage and time
+    if (item.mileageInterval && lastMil === null) {
+      if (isTimeOverdue) {
+        return {
+          status: "overdue",
+          badgeText: "⚠️ Overdue",
+          detailText: `Overdue by time (Done ${item.date})`,
+          remainingText: "Time Overdue"
+        };
+      }
+      if (isTimeDueSoon) {
+        return {
+          status: "duesoon",
+          badgeText: "⏳ Due Soon",
+          detailText: `Due on ${dueDateStr} (${daysRemaining} days left)`,
+          remainingText: `${daysRemaining} days left`
+        };
+      }
+      return {
+        status: "unknown",
+        badgeText: "❓ Pending mi",
+        detailText: "Set mileage to calculate scheduler",
+        remainingText: "Pending Mileage"
+      };
+    }
+
+    if (isMileageOverdue || isTimeOverdue) {
+      let overStr = "";
+      if (isMileageOverdue && milesRemaining !== null) {
+        overStr += `Overdue by ${Math.abs(milesRemaining).toLocaleString()} mi`;
+      }
+      if (isTimeOverdue && daysRemaining !== null) {
+        if (overStr) overStr += " & ";
+        overStr += `Overdue by ${Math.abs(daysRemaining)} days`;
+      }
+      if (!overStr) {
+        overStr = "Service Overdue";
+      }
+      return {
+        status: "overdue",
+        badgeText: "⚠️ Overdue",
+        detailText: overStr,
+        remainingText: overStr
+      };
+    }
+
+    if (isMileageDueSoon || isTimeDueSoon) {
+      let dueStr = "";
+      if (isMileageDueSoon && milesRemaining !== null) {
+        dueStr += `Due in ${milesRemaining.toLocaleString()} mi`;
+      }
+      if (isTimeDueSoon && daysRemaining !== null) {
+        if (dueStr) dueStr += " / ";
+        dueStr += `in ${daysRemaining} days`;
+      }
+      if (!dueStr) {
+        dueStr = "Due Soon";
+      }
+      return {
+        status: "duesoon",
+        badgeText: "⏳ Due Soon",
+        detailText: dueStr,
+        remainingText: dueStr
+      };
+    }
+
+    let goodStr = "";
+    if (milesRemaining !== null) {
+      goodStr += `Due in ${milesRemaining.toLocaleString()} mi`;
+    }
+    if (dueDateStr) {
+      if (goodStr) goodStr += " / ";
+      goodStr += `on ${dueDateStr}`;
+    }
+    if (!goodStr) {
+      goodStr = "Good";
+    }
+    return {
+      status: "good",
+      badgeText: "✅ Good",
+      detailText: goodStr,
+      remainingText: goodStr
+    };
+  }
+
   function initProjectDashboard() {
     const totalJobs = maintenanceChecklist.length;
     const completedJobs = maintenanceChecklist.filter(item => item.done === "Yes").length;
@@ -347,6 +528,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const projectProgressFill = document.getElementById("projectProgressFill");
     const projectProgressPercent = document.getElementById("projectProgressPercent");
     const lastUpdateVal = document.getElementById("lastUpdateVal");
+    const driveabilityStatus = document.getElementById("driveabilityStatus");
+    const warningBannerRow = document.getElementById("warningBannerRow");
+    const warningBannerText = document.getElementById("warningBannerText");
+    const odometerElement = document.getElementById("carOdometerVal");
 
     // Calculate percent
     const percent = totalJobs > 0 ? Math.round((completedJobs / totalJobs) * 100) : 0;
@@ -361,10 +546,45 @@ document.addEventListener("DOMContentLoaded", () => {
       projectProgressPercent.textContent = `${percent}%`;
     }
 
+    // Set odometer display
+    if (odometerElement) {
+      odometerElement.textContent = getOdometer().toLocaleString() + " mi";
+    }
+
+    // Calculate dynamic driveability and overdue warnings
+    let overdueCount = 0;
+    let dueSoonCount = 0;
+    maintenanceChecklist.forEach(item => {
+      const res = calculateTaskStatus(item);
+      if (res.status === "overdue") overdueCount++;
+      else if (res.status === "duesoon") dueSoonCount++;
+    });
+
+    if (driveabilityStatus) {
+      if (overdueCount > 0) {
+        driveabilityStatus.textContent = "SERVICE REQUIRED";
+        driveabilityStatus.className = "val red-text pulsing-status red-glow";
+      } else if (dueSoonCount > 0) {
+        driveabilityStatus.textContent = "SERVICE DUE SOON";
+        driveabilityStatus.className = "val yellow-text pulsing-status yellow-glow";
+      } else {
+        driveabilityStatus.textContent = "ROAD READY";
+        driveabilityStatus.className = "val green-text pulsing-status";
+      }
+    }
+
+    if (warningBannerRow && warningBannerText) {
+      if (overdueCount > 0) {
+        warningBannerRow.style.display = "flex";
+        warningBannerText.textContent = `${overdueCount} maintenance task${overdueCount > 1 ? 's' : ''} overdue!`;
+      } else {
+        warningBannerRow.style.display = "none";
+      }
+    }
+
     // Get the most recent log dynamically
     if (projectLogs && projectLogs.length > 0 && lastUpdateVal) {
       const latestLog = projectLogs[projectLogs.length - 1];
-      
       const dateObj = new Date(latestLog.date);
       let shortDate = latestLog.date;
       if (!isNaN(dateObj.getTime())) {
@@ -372,6 +592,27 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       lastUpdateVal.textContent = `${latestLog.title.split(":")[0]} (${shortDate})`;
     }
+  }
+
+  // Set up odometer click listener
+  const odometerElement = document.getElementById("carOdometerVal");
+  if (odometerElement) {
+    odometerElement.addEventListener("click", () => {
+      const currentOdo = getOdometer();
+      const input = prompt("Enter current odometer mileage (miles):", currentOdo);
+      if (input !== null) {
+        const val = parseInt(input.trim().replace(/,/g, ""), 10);
+        if (!isNaN(val) && val >= 0) {
+          setOdometer(val);
+          odometerElement.textContent = val.toLocaleString() + " mi";
+          // Recalculate dashboard & checklist
+          initProjectDashboard();
+          renderChecklist(currentChkFilter, currentChkSearch);
+        } else {
+          alert("Please enter a valid mileage value.");
+        }
+      }
+    });
   }
 
   // Call it on load
@@ -664,21 +905,61 @@ document.addEventListener("DOMContentLoaded", () => {
       // Item Name
       const nameTd = document.createElement("td");
       nameTd.className = "chk-item-name";
-      nameTd.textContent = item.item;
+      
+      let nameHTML = `<div class="chk-item-title" style="font-weight: bold; color: var(--text-main);">${item.item}</div>`;
+      if (item.type === "recurring") {
+        let intervalDesc = `Every `;
+        if (item.mileageInterval) {
+          intervalDesc += `${item.mileageInterval.toLocaleString()} mi`;
+        }
+        if (item.monthsInterval) {
+          if (item.mileageInterval) intervalDesc += " / ";
+          intervalDesc += `${item.monthsInterval} mo`;
+        }
+        nameHTML += `<div class="chk-item-subtitle font-mono" style="font-size: 0.65rem; color: var(--text-muted); margin-top: 2px;">(Recurring: ${intervalDesc})</div>`;
+      }
+      if (item.notes) {
+        nameHTML += `<div class="chk-item-notes" style="font-size: 0.65rem; color: #a5d6a7; margin-top: 3px; font-style: italic;">Parts: ${item.notes}</div>`;
+      }
+      nameTd.innerHTML = nameHTML;
       row.appendChild(nameTd);
       
       // Date Completed
       const dateTd = document.createElement("td");
       dateTd.className = "chk-item-date";
-      dateTd.textContent = item.date;
+      
+      if (item.done === "Future") {
+        dateTd.innerHTML = `<span style="color: var(--text-muted);">Future</span>`;
+      } else if (item.type === "recurring" && item.mileageInterval) {
+        const lastMil = getTaskLastMileage(item);
+        if (lastMil !== null) {
+          dateTd.innerHTML = `<div>${item.date}</div><div style="font-size: 0.7rem; color: var(--text-muted); margin-top: 2px;">@ ${lastMil.toLocaleString()} mi</div>`;
+        } else {
+          dateTd.innerHTML = `<div>${item.date}</div><button class="set-mileage-btn" data-task="${item.item}" style="margin-top: 4px;">Set mi</button>`;
+        }
+      } else {
+        dateTd.textContent = item.date;
+      }
       row.appendChild(dateTd);
       
       // Status Badge
       const statusTd = document.createElement("td");
-      const isDone = item.done === "Yes";
-      statusTd.innerHTML = isDone 
-        ? `<span class="status-badge done">✅ Done</span>` 
-        : `<span class="status-badge future">⏳ Future</span>`;
+      statusTd.className = "chk-item-status";
+      
+      const stat = calculateTaskStatus(item);
+      let badgeClass = "future";
+      if (stat.status === "good") badgeClass = "good";
+      else if (stat.status === "completed") badgeClass = "done";
+      else if (stat.status === "overdue") badgeClass = "overdue";
+      else if (stat.status === "duesoon") badgeClass = "duesoon";
+      else if (stat.status === "planned") badgeClass = "planned";
+      else if (stat.status === "unknown") badgeClass = "planned";
+      
+      let statusHTML = `<span class="status-badge ${badgeClass}">${stat.badgeText}</span>`;
+      if (item.type === "recurring" && stat.status !== "unknown") {
+        statusHTML += `<div style="font-size: 0.65rem; color: var(--text-muted); margin-top: 3px; font-family: var(--font-mono);">${stat.detailText}</div>`;
+      }
+      statusTd.innerHTML = statusHTML;
       row.appendChild(statusTd);
       
       checklistTableBody.appendChild(row);
@@ -700,6 +981,26 @@ document.addEventListener("DOMContentLoaded", () => {
       currentChkFilter = btn.getAttribute("data-filter");
       renderChecklist(currentChkFilter, currentChkSearch);
     });
+  });
+
+  // Bind Set Mileage buttons
+  checklistTableBody.addEventListener("click", (e) => {
+    if (e.target && e.target.classList.contains("set-mileage-btn")) {
+      const taskName = e.target.getAttribute("data-task");
+      const currentOdo = getOdometer();
+      const input = prompt(`Enter estimated mileage when "${taskName}" was completed:`, currentOdo - 500);
+      if (input !== null) {
+        const val = parseInt(input.trim().replace(/,/g, ""), 10);
+        if (!isNaN(val) && val >= 0) {
+          setTaskLastMileage(taskName, val);
+          // Recalculate dashboard & checklist
+          initProjectDashboard();
+          renderChecklist(currentChkFilter, currentChkSearch);
+        } else {
+          alert("Please enter a valid mileage value.");
+        }
+      }
+    }
   });
 
   // Initial Checklist Render & Stats

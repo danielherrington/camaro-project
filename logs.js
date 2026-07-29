@@ -258,7 +258,7 @@ const projectLogs = [
 
 // Complete Maintenance checklist data matching the Google Sheet
 const maintenanceChecklist = [
-  { item: "Drive Belt", date: "10/1/2023", done: "Yes" },
+  { item: "Drive Belt", date: "10/1/2023", done: "Yes", type: "recurring", mileageInterval: 30000, monthsInterval: 36, lastMileage: null, notes: "Gates serpentine belt" },
   { item: "Coolant Flush", date: "10/2/2023", done: "Yes" },
   { item: "Thermostat", date: "10/3/2023", done: "Yes" },
   { item: "Rear Main Seal", date: "10/4/2023", done: "Yes" },
@@ -274,23 +274,23 @@ const maintenanceChecklist = [
   { item: "Cameras", date: "3/1/2024", done: "Yes" },
   { item: "Lowering Springs", date: "6/1/2024", done: "Yes" },
   { item: "Suspension", date: "6/2/2024", done: "Yes" },
-  { item: "Tires", date: "6/3/2024", done: "Yes" },
+  { item: "Tires", date: "6/3/2024", done: "Yes", type: "recurring", mileageInterval: 40000, monthsInterval: 60, lastMileage: null, notes: "Performance tires" },
   { item: "Coolant Refill", date: "8/1/2024", done: "Yes" },
   { item: "Alternator", date: "9/8/2024", done: "Yes" },
   { item: "Oil Change", date: "9/8/2024", done: "Yes" },
-  { item: "Coolant Flush", date: "9/8/2024", done: "Yes" },
+  { item: "Coolant Flush", date: "9/8/2024", done: "Yes", type: "recurring", mileageInterval: 30000, monthsInterval: 36, lastMileage: null, notes: "Dex-Cool 50/50 mix" },
   { item: "Tensioner Pulley", date: "9/8/2024", done: "Yes" },
   { item: "Heater Hose", date: "9/8/2024", done: "Yes" },
   { item: "Steering Wheel Wrap", date: "12/1/2024", done: "Yes" },
-  { item: "Fuel Filter", date: "1/1/2025", done: "Yes" },
-  { item: "Air Filter", date: "1/1/2025", done: "Yes" },
+  { item: "Fuel Filter", date: "1/1/2025", done: "Yes", type: "recurring", mileageInterval: 15000, monthsInterval: 24, lastMileage: null, notes: "Inline fuel filter under driver rail" },
+  { item: "Air Filter", date: "1/1/2025", done: "Yes", type: "recurring", mileageInterval: 12000, monthsInterval: 12, lastMileage: null, notes: "K&N high-flow lifetime filter" },
   { item: "Exhaust Rubber Hanger", date: "1/26/2025", done: "Yes" },
   { item: "OBD2 EGR Diagnostics", date: "5/21/2025", done: "Yes" },
   { item: "PPF", date: "7/2/2025", done: "Yes" },
   { item: "Convertible Window Reseal", date: "9/3/2025", done: "Yes" },
   { item: "Ignition Coil", date: "9/3/2025", done: "Yes" },
-  { item: "Battery", date: "2/1/2026", done: "Yes" },
-  { item: "Oil Change", date: "2/1/2026", done: "Yes" },
+  { item: "Battery", date: "2/1/2026", done: "Yes", type: "recurring", monthsInterval: 48, lastMileage: null, notes: "GOOLOO battery jump box & 12V test" },
+  { item: "Oil Change", date: "2/1/2026", done: "Yes", type: "recurring", mileageInterval: 3000, monthsInterval: 6, lastMileage: null, notes: "K&N Synthetic 5W-30" },
   { item: "Paint Polish & Detailing", date: "3/27/2026", done: "Yes" },
   
   // Future Items

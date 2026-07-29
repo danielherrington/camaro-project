@@ -72,6 +72,10 @@
                 <span class="lbl">VIN REGISTRY:</span>
                 <span class="val cyan-text">#001999</span>
               </div>
+              <div class="spec-row">
+                <span class="lbl">CAR ODOMETER:</span>
+                <span class="val clickable-odometer" id="carOdometerVal" title="Click to update mileage">102,000 mi</span>
+              </div>
             </div>
           </div>
 
@@ -95,6 +99,11 @@
               <div class="metric-row">
                 <span class="lbl">DRIVEABILITY STATUS:</span>
                 <span class="val green-text pulsing-status" id="driveabilityStatus">ROAD READY</span>
+              </div>
+              <div class="metric-row warning-banner-row" id="warningBannerRow" style="display: none;">
+                <div class="alert-banner blinking-border">
+                  <span class="alert-icon">⚠️</span> <span id="warningBannerText">0 tasks overdue</span>
+                </div>
               </div>
             </div>
           </div>
@@ -251,9 +260,9 @@
             <table class="checklist-table">
               <thead>
                 <tr>
-                  <th style="width: 50%">TASK / REPAIR</th>
-                  <th style="width: 25%">DATE COMPLETED</th>
-                  <th style="width: 25%">STATUS</th>
+                  <th style="width: 45%">TASK / REPAIR</th>
+                  <th style="width: 30%">LAST COMPLETED</th>
+                  <th style="width: 25%">STATUS / NEXT DUE</th>
                 </tr>
               </thead>
               <tbody id="checklistTableBody">

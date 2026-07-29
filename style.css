@@ -350,10 +350,17 @@ body {
 .green-text { color: #00e676; }
 .yellow-text { color: #ffd600; }
 .orange-text { color: #ff6d00; }
+.red-text { color: #ff1744; }
 
 .pulsing-status {
   text-shadow: 0 0 8px rgba(0, 230, 118, 0.5);
   animation: pulse-green 2s infinite alternate;
+}
+.pulsing-status.red-glow {
+  text-shadow: 0 0 8px rgba(255, 23, 68, 0.6) !important;
+}
+.pulsing-status.yellow-glow {
+  text-shadow: 0 0 8px rgba(255, 214, 0, 0.6) !important;
 }
 
 @keyframes pulse-green {
@@ -1599,10 +1606,105 @@ body.theme-pewter .submit-btn {
   background: rgba(0, 230, 118, 0.04);
 }
 
+.status-badge.good {
+  color: #00e676;
+  border: 1px solid rgba(0, 230, 118, 0.2);
+  background: rgba(0, 230, 118, 0.04);
+  box-shadow: 0 0 6px rgba(0, 230, 118, 0.15);
+}
+
 .status-badge.future {
   color: #ff9100;
   border: 1px solid rgba(255, 145, 0, 0.2);
   background: rgba(255, 145, 0, 0.04);
+}
+
+.status-badge.planned {
+  color: #ff9100;
+  border: 1px solid rgba(255, 145, 0, 0.2);
+  background: rgba(255, 145, 0, 0.04);
+}
+
+.status-badge.overdue {
+  color: #ff1744;
+  border: 1px solid rgba(255, 23, 68, 0.3);
+  background: rgba(255, 23, 68, 0.08);
+  box-shadow: 0 0 8px rgba(255, 23, 68, 0.2);
+  text-shadow: 0 0 2px rgba(255, 23, 68, 0.5);
+}
+
+.status-badge.duesoon {
+  color: #ffd600;
+  border: 1px solid rgba(255, 214, 0, 0.3);
+  background: rgba(255, 214, 0, 0.08);
+  box-shadow: 0 0 8px rgba(255, 214, 0, 0.2);
+  text-shadow: 0 0 2px rgba(255, 214, 0, 0.5);
+}
+
+.clickable-odometer {
+  cursor: pointer;
+  text-shadow: 0 0 5px var(--neon-cyan);
+  transition: all 0.2s ease;
+  border-bottom: 1px dashed rgba(0, 245, 255, 0.3);
+  padding-bottom: 1px;
+}
+
+.clickable-odometer:hover {
+  color: #fff;
+  text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan);
+  border-bottom-color: var(--neon-cyan);
+}
+
+.set-mileage-btn {
+  display: inline-block;
+  background: transparent;
+  border: 1px dashed rgba(0, 245, 255, 0.4);
+  color: var(--neon-cyan);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+}
+
+.set-mileage-btn:hover {
+  background: rgba(0, 245, 255, 0.1);
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 8px rgba(0, 245, 255, 0.2);
+}
+
+.alert-banner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 23, 68, 0.1);
+  border: 1px solid rgba(255, 23, 68, 0.4);
+  padding: 6px 12px;
+  border-radius: 4px;
+  color: #ff5252;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.alert-icon {
+  font-size: 0.9rem;
+}
+
+@keyframes blink-red-border {
+  0%, 100% { border-color: rgba(255, 23, 68, 0.4); box-shadow: 0 0 10px rgba(255, 23, 68, 0.15); }
+  50% { border-color: rgba(255, 23, 68, 0.9); box-shadow: 0 0 15px rgba(255, 23, 68, 0.4); }
+}
+
+.blinking-border {
+  animation: blink-red-border 1.5s infinite;
+}
+
+.warning-banner-row {
+  margin-top: 10px !important;
 }
 
 /* Card & Modal Image styles with absolute positioning & fallback containment */
