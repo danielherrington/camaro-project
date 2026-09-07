@@ -572,6 +572,16 @@ body {
   opacity: 0.3;
 }
 
+.award-tag {
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  text-shadow: 0 0 6px rgba(255, 214, 0, 0.4);
+}
+
+.font-bold {
+  font-weight: bold;
+}
+
 /* ==========================================================================
    Spec Perspective Table
    ========================================================================== */

@@ -210,6 +210,28 @@ document.addEventListener("DOMContentLoaded", () => {
         <path d="M 75 25 L 78 28 L 75 31 L 72 28 Z" fill="var(--secondary-color)"/>
         <path d="M 25 70 L 28 73 L 25 76 L 22 73 Z" fill="var(--secondary-color)"/>
       </svg>
+    `,
+    "north-beach-car-show": `
+      <svg viewBox="0 0 100 100" class="log-vector-art">
+        <rect width="100" height="100" fill="rgba(255, 215, 0, 0.08)"/>
+        <!-- Trophy Cup -->
+        <path d="M 35 28 L 65 28 L 60 52 C 57 60, 43 60, 40 52 Z" fill="rgba(255, 215, 0, 0.15)" stroke="#ffd700" stroke-width="2"/>
+        <!-- Handles -->
+        <path d="M 35 32 C 24 32, 24 46, 36 48" fill="none" stroke="#ffd700" stroke-width="1.8"/>
+        <path d="M 65 32 C 76 32, 76 46, 64 48" fill="none" stroke="#ffd700" stroke-width="1.8"/>
+        <!-- Stem & Base -->
+        <line x1="50" y1="58" x2="50" y2="70" stroke="#ffd700" stroke-width="2.5"/>
+        <polygon points="36,78 64,78 60,70 40,70" fill="rgba(255, 215, 0, 0.2)" stroke="#ffd700" stroke-width="2"/>
+        <!-- Number 2 -->
+        <text x="50" y="43" font-family="'Share Tech Mono', monospace" font-size="14" font-weight="bold" fill="#00e5ff" text-anchor="middle" dominant-baseline="middle">2</text>
+        <!-- Ribbons -->
+        <path d="M 44 78 L 38 88 L 44 85 L 50 88 L 47 78" fill="rgba(0, 230, 240, 0.3)" stroke="var(--primary-color)" stroke-width="1.2"/>
+        <path d="M 53 78 L 50 88 L 56 85 L 62 88 L 56 78" fill="rgba(255, 51, 102, 0.3)" stroke="var(--secondary-color)" stroke-width="1.2"/>
+        <!-- Sparkles / Star -->
+        <circle cx="26" cy="22" r="1.5" fill="#ffd700"/>
+        <circle cx="74" cy="22" r="1.5" fill="#ffd700"/>
+        <path d="M 50 14 L 52 18 L 56 18 L 53 21 L 54 25 L 50 22 L 46 25 L 47 21 L 44 18 L 48 18 Z" fill="#ffd700"/>
+      </svg>
     `
   };
 

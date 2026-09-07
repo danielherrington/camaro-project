@@ -253,6 +253,27 @@ const projectLogs = [
       <p>I started with a clay bar treatment to pull embedded contaminants out of the clearcoat, followed by a dual-action polisher with a medium-cut compound to eliminate swirls. I finished it off with a high-grade carnauba wax for a deep, wet-look reflection. To complete the work, I popped the hood and cleaned decades of road grime off the engine block, leaving the engine bay looking fresh and tidy for the next local car meet.</p>
     `,
     tags: ["Cosmetics", "Detailing", "Polishing", "Paint Correction"]
+  },
+  {
+    id: "north-beach-car-show",
+    date: "August 30, 2026",
+    title: "Podium Finish: 2nd Place at North Beach Elementary Car Show",
+    category: "cruising",
+    difficulty: 0,
+    time: "4 hours",
+    cost: "Charity Donation",
+    image: "assets/car_polished.jpg",
+    summary: "The unloved catfish brings home 2nd place at the North Beach Elementary charity car show hosted by Box Box Car Club, winning over the kids against a sea of Porsche 911s.",
+    content: `
+      <p>For decades, car enthusiasts dismissed the fourth-generation "catfish" Camaro. Purists scoffed at the bio-design nose, noted it was a V6 instead of an LS1 V8, and pointed out the automatic transmission and convertible chassis flex. But all of that internet cynicism was completely shattered at the <strong>North Beach Elementary School Car Show</strong> in Miami Beach, hosted by <strong>Box Box Car Club</strong>.</p>
+      
+      <p>This wasn't an ordinary judged concourse—it was a charity event where the elementary school kids had the voting power to choose their favorite cars. The show field was packed with serious machinery, including exotic supercars and over a dozen very cool, high-dollar Porsche 911s.</p>
+      
+      <p>When the ballots were tallied, a Ferrari claimed 1st place. But in an incredible twist of voting math, the dozen 911s split their votes among themselves—leaving the door wide open for the kids to vote with pure heart. And who grabbed their attention? The glistening Mystic Teal 1999 Camaro convertible.</p>
+      
+      <p>Against all odds, the Catfish secured <strong>2nd Place Overall</strong>! Seeing the kids swarm the car, admire the polished teal paint, and celebrate a car my dad bought brand new in 1999 is the ultimate vindication. The car they said was unloved has officially become a crowd-favorite winner.</p>
+    `,
+    tags: ["Car Show", "Trophy", "Award", "Community", "Miami", "Box Box Car Club"]
   }
 ];
 
@@ -292,6 +313,7 @@ const maintenanceChecklist = [
   { item: "Battery", date: "2/1/2026", done: "Yes", type: "recurring", monthsInterval: 48, lastMileage: null, notes: "GOOLOO battery jump box & 12V test" },
   { item: "Oil Change", date: "2/1/2026", done: "Yes", type: "recurring", mileageInterval: 3000, monthsInterval: 6, lastMileage: null, notes: "K&N Synthetic 5W-30" },
   { item: "Paint Polish & Detailing", date: "3/27/2026", done: "Yes" },
+  { item: "North Beach Elementary Car Show (2nd Place)", date: "8/30/2026", done: "Yes", notes: "Hosted by Box Box Car Club - Kids' Choice Award!" },
   
   // Future Items
   { item: "Lower Intake Manifold Gasket", date: "Future", done: "Future" },
