@@ -1,0 +1,19 @@
+{
+  "hosting": {
+    "site": "daniel-catfish",
+    "public": ".",
+    "ignore": [
+      "firebase.json",
+      ".firebaserc",
+      ".git",
+      ".git/**",
+      "**/.git/**",
+      "**/.*",
+      "**/node_modules/**",
+      "assets/Camaro Photos/**",
+      "README.md"
+    ],
+    "cleanUrls": true,
+    "trailingSlash": false
+  }
+}
