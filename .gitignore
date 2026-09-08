@@ -2,3 +2,4 @@
 .agents/
 .gemini/
 *.log
+.firebase/
