@@ -344,7 +344,7 @@ const maintenanceChecklist = [
   { item: "Heater Hose", date: "9/8/2024", done: "Yes" },
   { item: "Steering Wheel Wrap", date: "12/1/2024", done: "Yes" },
   { item: "Fuel Filter", date: "1/1/2025", done: "Yes", type: "recurring", mileageInterval: 15000, monthsInterval: 24, lastMileage: null, notes: "Inline fuel filter under driver rail" },
-  { item: "Air Filter", date: "1/1/2025", done: "Yes", type: "recurring", mileageInterval: 12000, monthsInterval: 12, lastMileage: null, notes: "K&N high-flow lifetime filter" },
+  { item: "Air Filter", date: "1/1/2025", done: "Yes", type: "recurring", mileageInterval: 50000, monthsInterval: 48, lastMileage: null, notes: "K&N washable synthetic lifetime filter (clean & service interval)" },
   { item: "Exhaust Rubber Hanger", date: "1/26/2025", done: "Yes" },
   { item: "OBD2 EGR Diagnostics", date: "5/21/2025", done: "Yes" },
   { item: "PPF", date: "7/2/2025", done: "Yes" },
