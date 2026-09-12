@@ -232,6 +232,32 @@ document.addEventListener("DOMContentLoaded", () => {
         <circle cx="74" cy="22" r="1.5" fill="#ffd700"/>
         <path d="M 50 14 L 52 18 L 56 18 L 53 21 L 54 25 L 50 22 L 46 25 L 47 21 L 44 18 L 48 18 Z" fill="#ffd700"/>
       </svg>
+    `,
+    "end-of-summer-snapon": `
+      <svg viewBox="0 0 100 100" class="log-vector-art">
+        <rect width="100" height="100" fill="rgba(0, 85, 179, 0.08)"/>
+        <!-- Snap-on Roll Cab (Toolbox) -->
+        <rect x="22" y="32" width="56" height="50" rx="3" fill="#0d2b5c" stroke="#00e5ff" stroke-width="1.8"/>
+        <!-- Stainless Steel Top -->
+        <rect x="20" y="29" width="60" height="5" rx="1" fill="#c0c7d0" stroke="#fff" stroke-width="1"/>
+        <!-- Drawer Lines -->
+        <line x1="26" y1="40" x2="74" y2="40" stroke="#00e5ff" stroke-width="1.2"/>
+        <line x1="26" y1="48" x2="74" y2="48" stroke="#00e5ff" stroke-width="1.2"/>
+        <line x1="26" y1="56" x2="74" y2="56" stroke="#00e5ff" stroke-width="1.2"/>
+        <line x1="26" y1="64" x2="74" y2="64" stroke="#00e5ff" stroke-width="1.2"/>
+        <line x1="26" y1="72" x2="74" y2="72" stroke="#00e5ff" stroke-width="1.2"/>
+        <!-- Vertical Drawer Divider -->
+        <line x1="42" y1="40" x2="42" y2="78" stroke="#00e5ff" stroke-width="1.2"/>
+        <!-- Caster Wheels -->
+        <circle cx="30" cy="84" r="3" fill="#333" stroke="#888" stroke-width="1"/>
+        <circle cx="70" cy="84" r="3" fill="#333" stroke="#888" stroke-width="1"/>
+        <!-- Ratchet / Wrench Emblem Crossing -->
+        <path d="M 68 18 L 84 34 M 78 16 L 86 24 L 82 28 L 74 20 Z" fill="none" stroke="#ff3366" stroke-width="2.2" stroke-linecap="round"/>
+        <!-- Oil Can / Droplet -->
+        <path d="M 18 20 C 18 14, 26 14, 26 20 C 26 25, 18 25, 18 20 Z" fill="#ffd700" stroke="#ffd700" stroke-width="0.5"/>
+        <!-- Sparkles -->
+        <path d="M 50 16 L 52 20 L 56 20 L 53 23 L 54 27 L 50 24 L 46 27 L 47 23 L 44 20 L 48 20 Z" fill="#ffd700"/>
+      </svg>
     `
   };
 
@@ -444,8 +470,8 @@ document.addEventListener("DOMContentLoaded", () => {
         dueDate.setMonth(dueDate.getMonth() + item.monthsInterval);
         dueDateStr = dueDate.toLocaleDateString(undefined, { month: 'numeric', day: 'numeric', year: '2-digit' });
         
-        // Current date is July 28, 2026
-        const currentDate = new Date('2026-07-28');
+        // Dynamic current date for service interval calculations
+        const currentDate = new Date();
         const msDiff = dueDate - currentDate;
         daysRemaining = Math.ceil(msDiff / (1000 * 60 * 60 * 24));
         

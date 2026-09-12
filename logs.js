@@ -274,6 +274,46 @@ const projectLogs = [
       <p>Against all odds, the Catfish secured <strong>2nd Place Overall</strong>! Seeing the kids swarm the car, admire the polished teal paint, and celebrate a car my dad bought brand new in 1999 is the ultimate vindication. The car they said was unloved has officially become a crowd-favorite winner.</p>
     `,
     tags: ["Car Show", "Trophy", "Award", "Community", "Miami", "Box Box Car Club"]
+  },
+  {
+    id: "end-of-summer-snapon",
+    date: "September 12, 2026",
+    title: "End of Summer Service: An Ode to Tim & The Snap-on Heritage",
+    category: "general",
+    difficulty: 1,
+    time: "2 hours",
+    cost: "$45 (Oil & Coolant)",
+    image: "assets/snapon_tool_chest.jpg",
+    summary: "Wrapping up summer with fresh synthetic oil, topped-off coolant, and dialed tire pressures—the very first service on the Camaro using 30 years of Snap-on tools inherited from my legendary neighbor and wrenching partner, Tim.",
+    content: `
+      <p>As summer draws to a close in Miami, it was time for seasonal preventative maintenance on the 3800 V6: a fresh synthetic oil and filter change, checking and inflating all four tires to factory pressure spec, and topping off the coolant overflow reservoir. On paper, it's the simplest routine driveway service you can perform on an F-body. But today, turning that 15mm oil drain bolt and replacing the filter felt profoundly different.</p>
+
+      <p>This was my very first time wrenching on the Camaro using a complete, professional-grade <strong>Snap-on tool collection</strong>—inherited from my neighbor, Tim, who is packing up and moving away. Tim has been the undisputed best neighbor anyone could ever ask for. Over the years, we spent countless afternoons side by side on our driveways, swapping car stories, diagnosing mysterious noises, sharing cold drinks, and wrenching together. With his move, he handed down his pride and joy: an extraordinary royal blue Snap-on Lock 'n Roll roll cab packed with over <strong>30 years of tool collecting</strong>.</p>
+
+      <div class="tribute-box">
+        <p>"An oil change is such a simple task, but doing it with Snap-on tools is a whole other feel of premium luxury that was just absolutely incredible. This first turn of the ratchet is dedicated to Tim—the best neighbor, mentor, and driveway wrenching partner anyone could ask for."</p>
+      </div>
+
+      <div class="log-gallery-grid">
+        <div class="log-gallery-item">
+          <img src="assets/snapon_tool_chest.jpg" alt="Tim's Snap-on Lock 'n Roll Tool Chest">
+          <div class="log-gallery-caption">Tim's royal blue Snap-on Lock 'n Roll roll cab with stainless work top.</div>
+        </div>
+        <div class="log-gallery-item">
+          <img src="assets/snapon_tools_collection.jpg" alt="Organized Snap-on tool drawers">
+          <div class="log-gallery-caption">30 years of collected Snap-on ratchets, sockets, wrenches, and specialty tools.</div>
+        </div>
+        <div class="log-gallery-item">
+          <img src="assets/camaro_hood_creeper.jpg" alt="Camaro hood up with creeper ready">
+          <div class="log-gallery-caption">Under the hood & on the creeper for end-of-summer maintenance.</div>
+        </div>
+      </div>
+
+      <p>Anyone who has wrenched with budget tools knows the feeling of sloppy ratchet tolerances, flex in socket extensions, and rounded fasteners. Stepping up to Snap-on is night and day: the ultra-fine tooth ratchet mechanism engages with a smooth, authoritative, zero-backlash click. The chrome feels silky, the balance in your palm is weighted perfection, and sockets grip bolt heads with bank-vault rigidity. It transforms basic maintenance into pure mechanical luxury.</p>
+
+      <p>With fresh 5W-30 synthetic oil circulating, tires inflated for crisp steering response, and the coolant level dialed in, the Catfish is running smooth and ready for fall top-down cruising. Tim, you will be dearly missed on our street, but every single time I pop the hood and grab a ratchet from this blue box, your passion and generosity will be right here keeping this Camaro alive.</p>
+    `,
+    tags: ["Maintenance", "Oil Change", "Snap-on", "Ode to Tim", "Tires", "Coolant", "Community"]
   }
 ];
 
@@ -311,9 +351,12 @@ const maintenanceChecklist = [
   { item: "Convertible Window Reseal", date: "9/3/2025", done: "Yes" },
   { item: "Ignition Coil", date: "9/3/2025", done: "Yes" },
   { item: "Battery", date: "2/1/2026", done: "Yes", type: "recurring", monthsInterval: 48, lastMileage: null, notes: "GOOLOO battery jump box & 12V test" },
-  { item: "Oil Change", date: "2/1/2026", done: "Yes", type: "recurring", mileageInterval: 3000, monthsInterval: 6, lastMileage: null, notes: "K&N Synthetic 5W-30" },
+  { item: "Oil Change (K&N Synthetic)", date: "2/1/2026", done: "Yes", notes: "K&N Synthetic 5W-30" },
   { item: "Paint Polish & Detailing", date: "3/27/2026", done: "Yes" },
   { item: "North Beach Elementary Car Show (2nd Place)", date: "8/30/2026", done: "Yes", notes: "Hosted by Box Box Car Club - Kids' Choice Award!" },
+  { item: "Oil Change", date: "9/12/2026", done: "Yes", type: "recurring", mileageInterval: 3000, monthsInterval: 6, lastMileage: null, notes: "End-of-summer service with Tim's Snap-on tools" },
+  { item: "Tire Inflation & Pressure Check", date: "9/12/2026", done: "Yes", notes: "Inflated all 4 tires to spec for end-of-summer maintenance" },
+  { item: "Coolant Top-Off", date: "9/12/2026", done: "Yes", notes: "Topped off coolant overflow reservoir" },
   
   // Future Items
   { item: "Lower Intake Manifold Gasket", date: "Future", done: "Future" },
